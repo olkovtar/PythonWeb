@@ -1,18 +1,19 @@
 import socket
-from datetime import datetime
 
 host = 'localhost'
 port = 16789
 
-address = socket.socket()
-address.connect((host, port))
+client = socket.socket()
+client.connect((host, port))
 
 message = input(" -> ")
 
-address.send(message.encode())
+while message.lower().strip() != 'quit':
+    client.send(message.encode())
+    data = client.recv(1024).decode()
 
-data = address.recv(1024).decode()
+    print('Received from server: ' + data)
 
-print('Received from server: ' + data, datetime.now())
+    message = input(" -> ")
 
-address.close()
+client.close()
