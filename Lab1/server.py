@@ -1,27 +1,23 @@
 import socket
 from datetime import datetime
-import time
 
 host = 'localhost'
 port = 16789
 
-address = socket.socket()
-address.bind((host, port))
+server = socket.socket()
+server.bind((host, port))
 
-print('Starting the server at', datetime.now())
+server.listen(2)
+conn, addr = server.accept()
 
-address.listen(2)
-
-conn, addr = address.accept()
-
-print("Connection from: " + str(addr))
-
-data = conn.recv(1024).decode()
-
-print("From connected user: " + str(data) + "  received at", datetime.now())
-
-if data:
-    time.sleep(5)
+print("Connection from: " + str(addr) + " at", datetime.now())
+while True:
+    # It won't accept data packet greater than 1024 bytes
+    data = conn.recv(1024).decode()
+    if not data:
+        # if data is not received - break
+        break
+    print("from connected user: " + str(data))
     conn.send(data.encode())
 
 conn.close()
