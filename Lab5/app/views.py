@@ -7,6 +7,8 @@ import os
 from loguru import logger
 import datetime as dt
 
+logger.add("messages.log", format="{time:YYYY-MM-DD HH:mm:ss.SSS} | [{level}] | {message}")
+
 
 @app.route('/')
 def about():
@@ -80,9 +82,7 @@ def footer_info():
 
 
 def save_message(form):
-    logger.add("messages.log", format="{time:YYYY-MM-DD HH:mm:ss.SSS} | [{level}] | {message}")
     logger.success(f"{form.name.data} | {form.email.data} | {form.phone.data} | {form.library.data} | {form.message.data} |")
-
     session['username'] = form.name.data
     session['email'] = form.email.data
 
