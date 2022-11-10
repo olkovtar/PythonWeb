@@ -40,7 +40,7 @@ def contact():
     if form.validate_on_submit():
         session['username'] = form.name.data
         session['email'] = form.email.data
-        save_message(form)
+        save_message_to_db(form)
         flash(f"Your message has been sent: {form.name.data}, {form.email.data}", category='success')
         return redirect(url_for("contact"))
 
@@ -81,7 +81,7 @@ def footer_info():
 '''
 
 
-def save_message(form):
+def save_message_to_db(form):
     logger.success(f"{form.name.data} | {form.email.data} | {form.phone.data} | {form.library.data} | {form.message.data} |")
     session['username'] = form.name.data
     session['email'] = form.email.data
