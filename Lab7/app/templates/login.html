@@ -14,7 +14,7 @@
       </div>
 
       <div class="card-body bg-success">
-        <form method="post" action="{{ url_for('login', next=request.args.get('next')) }}">
+        <form method="post">
           {{ form.csrf_token }}
           <center>{{ render_field(form.email, class="form-control") }}</center>
           <center>{{ render_field(form.password, class="form-control") }}</center>
