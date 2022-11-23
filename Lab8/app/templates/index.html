@@ -1,0 +1,26 @@
+
+
+{% extends 'layout.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block name %}
+
+{% if name %}
+<br><h1 class="text-center">{{name}}</h1>
+{% else %}
+<br><h1 class="text-center">Oleh Koval</h1>
+{% endif %}
+
+{% endblock %}
+
+{% block body %}
+<br><hr><br>
+
+<p class="text-center">Student at Vasyl Stefanyk Precarpathian National University</p>
+<p class="text-center"> I am studying for a specialty "Software engineering".</p>
+<p class="text-center">I like everything related to computers and want to learn everything</p>
+<p class="text-center">But I am very lazy, which greatly hinders me from achieving my goal</p>
+
+<br><hr><br>
+{% endblock %}

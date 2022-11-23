@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %} Login {% endblock %}
+
+{% block body %}
+
+{% from "_render_field.html" import render_field %}
+
+  <br><br><div class="col-5 mx-auto d-flex justify-content-center">
+
+    <div class="card w-50 ">
+
+      <div class="card-header bg-dark">
+        <h5 class="text-center" style="color:white">Log In</h5>
+      </div>
+
+      <div class="card-body bg-success">
+        <form method="post">
+        <form method="post" action="{{ url_for('login', next=request.args.get('next')) }}">
+          {{ form.csrf_token }}
+          <center>{{ render_field(form.email, class="form-control") }}</center>
+          <center>{{ render_field(form.password, class="form-control") }}</center>
+          {{ render_field(form.remember, class="form-check-input") }}
+          {{ form.submit(class="btn btn-dark w-100") }}
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}
