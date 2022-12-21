@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %} Assigning Users{% endblock %}
+
+{% block name %}
+<br>
+<h2 class="text-center"> Assign user </h2>
+{% endblock %}
+
+{% block body %}
+
+{% from "_render_field.html" import render_field %}
+
+
+<div class="col-5 mx-auto">
+
+    <br><br><center><div class="card w-50">
+
+        <div class="card-header bg-dark">
+        <h5 class="text-center" style="color:white">Assign user by email</h5>
+      </div>
+
+        <div class="card-body bg-success">
+            <form action="{{ url_for('task_actions.assign_user_task', task_id=id) }}" method="post">
+                {{ form.hidden_tag() }}
+                <input type="text" name="email" class="form-control" placeholder="Email"><br>
+                <button type="submit" class="form-control btn btn-primary">Add</button>
+            </form>
+        </div>
+
+    </div>
+</center>
+</div>
+
+{% endblock %}

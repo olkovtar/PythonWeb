@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block title %} Users {% endblock %}
+<!--table table-hover table-bordered table-striped-->
+{% block body %}
+    {% if all_users %}
+<br><h3 class="text-center">Users: {{all_users|length}}</h3><br>
+<table class="table table-hover table-bordered table-striped">
+    <thead class="text-center table-primary">
+      <tr>
+       <th scope="col">Id</th>
+       <th scope="col">Username</th>
+       <th scope="col">Email</th>
+       <th scope="col">Image</th>
+      </tr>
+    </thead>
+    {% for user in all_users %}
+    <tbody>
+      <tr class="text-center align-middle">
+       <td>{{user.id}}</td>
+       <td>{{user.username}}</td>
+       <td>{{user.email}}</td>
+       <td>{{user.image_file}}</td>
+       </tr>
+    </tbody>
+    {% endfor%}
+ </table>
+    {% else %}
+    <br><br><h3 class="text-center">No Users Registered</h3>
+    {% endif %}
+{% endblock %}
