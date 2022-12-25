@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %} Categories {% endblock %}
+
+{% block body %}
+    {% if categories %}
+<br><h3 class="text-center">Current Categories: {{categories|length}}</h3><br>
+<table class="table table-hover table-bordered table-striped">
+    <thead class="text-center table-primary">
+      <tr>
+       <th scope="col">ID</th>
+       <th scope="col">Name</th>
+       <th scope="col"><a href="{{ url_for('task_actions.category_add') }}" type="button" class="btn btn-success">Add</a></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+      <tr class="text-center align-middle">
+       <td>{{category.id}}</td>
+       <td>{{category.name}}</td>
+       <td>
+        <a href="{{url_for('task_actions.category_delete', id=category.id)}}">
+            <input type="button" class="btn btn-danger" value="Delete">
+        </a>
+        <a href="{{url_for('task_actions.category_update', id=category.id)}}">
+            <input type="button" class="btn btn-primary" value="Edit">
+        </a>
+    </td>
+       </tr>
+    </tbody>
+    {% endfor%}
+ </table>
+    {% else %}
+    <br><br><h3 class="text-center">No Categories Created yet</h3>
+    {% endif %}
+
+{% endblock %}

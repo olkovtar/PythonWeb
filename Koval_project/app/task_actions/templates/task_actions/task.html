@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block title %} Task {% endblock %}
+
+{% block name %}
+<br>
+<h1 class="text-center">Task</h1>
+{% endblock %}
+
+{% block body %}
+
+<table class="table table-hover table-bordered table-striped table-primary w-50 mx-auto">
+    <tbody>
+        {% for label, text_data in task_detail.items() %}
+        <tr>
+            <td>{{ label }}</td>
+            {% if label == "Priority" or label == "Progress" %}
+            <td>{{ text_data.name }}</td>
+            {% else %}
+            <td>{{ text_data|safe }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Assigned</td>
+            <td>
+                {% for user in assigned %}
+                <div class="row">
+                    <div class="col-2">
+                        <a class="link-dark" href="{{ url_for('task_actions.user_profile', user_id=user.id) }}">{{
+                            user.username }}</a>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Operations with task
+            </td>
+            <td>
+                | <a class="btn btn-warning w-40" href="{{ url_for('task_actions.task_update', id=id) }}">Update task</a> |
+                <a class="btn btn-danger w-40" href="{{ url_for('task_actions.task_delete', id=id) }}">Delete task</a> |
+                <a class="btn btn-info w-40" href="{{ url_for('task_actions.assign_user_task', task_id=id) }}">Assign user</a> |
+                <a class="btn btn-dark w-40" href="{{ url_for('task_actions.add_comment', task_id=id) }}">Add comment</a> |
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br><hr>
+<h1 class="w-100" style="text-align: center;">Comments</h1>
+
+<center>
+{% for comment in data['comments'] %}
+<div class="card text-dark bg-light mb-3 text-center" style="max-width: 18rem;">
+    <div class="card-header">Comment</div>
+    <div class="card-body">
+        <p class="card-text">{{ comment.content|safe }}</p>
+    </div>
+
+</div>
+    {% endfor %}
+</center>
+{% block modal %}
+{% endblock %}
+    {% endblock %}
