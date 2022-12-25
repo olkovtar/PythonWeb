@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 from urllib.parse import urlparse, urljoin
+from .. import bcrypt
 
 from .. import db
 from .models import User
@@ -9,7 +10,6 @@ import os
 from datetime import datetime
 import secrets
 from PIL import Image
-from werkzeug.security import generate_password_hash
 from . import account_bp
 
 
@@ -31,6 +31,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             flash(f"Account created for {form.username.data}!", category='success')
+            return redirect(url_for('account.login'))
         except:
             db.session.flush()
             db.session.rollback()
@@ -128,7 +129,7 @@ def after_request(response):
 def reset_password():
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        current_user.password = generate_password_hash(form.new_password.data)
+        current_user.password = bcrypt.generate_password_hash(form.new_password.data).decode('utf8')
         try:
             db.session.commit()
         except:
@@ -137,8 +138,3 @@ def reset_password():
         flash(f"Your password successfully changed", category='success')
         return redirect(url_for('account.account'))
     return render_template('reset_password.html', form=form)
-
-
-
-
-
