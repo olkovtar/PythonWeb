@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self.password = generate_password_hash(password=password).decode('utf8')
+        self.password = generate_password_hash(password=password)
 
     def verify_password(self, password):
         return check_password_hash(self.password, password)
