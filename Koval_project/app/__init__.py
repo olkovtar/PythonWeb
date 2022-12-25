@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, migrate
 from flask_login import LoginManager
@@ -8,6 +9,8 @@ from flask_jwt_extended import JWTManager
 import sqlalchemy as sa
 from click import echo
 from config import config
+
+bcrypt = Bcrypt()
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -26,6 +29,7 @@ def create_app(config_name='default'):
 
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
+    bcrypt.init_app(app)
     login_manager.init_app(app)
     ckeditor.init_app(app)
     jwt.init_app(app)
@@ -69,3 +73,4 @@ def register_cli_commands(app):
         db.drop_all()
         db.create_all()
         echo('Initialized the database!')
+
