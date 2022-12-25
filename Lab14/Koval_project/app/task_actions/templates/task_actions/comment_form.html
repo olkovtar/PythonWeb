@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %} New Comment {% endblock %}
+
+{% block name %}
+<br>
+<h2 class="text-center">Add Comment</h2>
+{% endblock %}
+
+{% block body %}
+{% from "_render_field.html" import render_field %}
+
+<div class="col-5 mx-auto">
+
+    <br><br><center><div class="card w-50">
+
+        <div class="card-header bg-dark">
+        <h5 class="text-center" style="color:white">Enter your comment in the field</h5>
+      </div>
+
+        <div class="card-body bg-success">
+      <form action="{{ url_for('task_actions.add_comment', task_id=task_id) }}" method="post" class="">
+        {{ form.hidden_tag() }}
+        {% for field in form if field not in [form.submit, form.hidden_tag, form.csrf_token] %}
+        {{render_field(field, class="form-control f-input")}}
+        {% endfor %}
+        {{ form.submit(class_="form-control btn btn-primary") }}
+      </form>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='text') }}
+    </div>
+
+  </div>
+</center>
+</div>
+
+{% endblock %}
