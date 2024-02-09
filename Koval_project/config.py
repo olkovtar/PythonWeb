@@ -2,6 +2,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+app.config['SECRET_KEY'] = SECRET_KEY
 
 class Config:
     DEVELOPMENT = False
