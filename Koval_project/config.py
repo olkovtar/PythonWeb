@@ -28,7 +28,6 @@ class TestConfig(Config):
 
 class ProdConfig(Config):
     WTF_CSRF_ENABLED = True
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'supersecretkey'
     if os.getenv('DATABASE_URL'):
         SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
     else:
