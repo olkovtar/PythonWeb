@@ -1,7 +1,7 @@
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-SECRET_KEY = supersecretkey
+SECRET_KEY = 'supersecretkey'
 app.config['SECRET_KEY'] = SECRET_KEY
 
 class Config:
