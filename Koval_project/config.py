@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     DEVELOPMENT = False
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'supersecretkey'
+    SECRET_KEY = 'supersecretkey'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = True
 
